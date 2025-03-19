@@ -1,0 +1,45 @@
+{
+    "name": "mpsoft/mpeurosolution",
+    "description": "Gestione id Eurosolution per i clienti",
+    "authors": [
+        {
+            "name": "Massimiliano Palermo",
+            "email": "maxx.palermo@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1.0",
+        "prestashop/prestashop-webservice-lib": "dev-master",
+        "phpoffice/phpspreadsheet": "^3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "MpSoft\\MpEurosolution\\": "src/"
+        },
+        "classmap": [],
+        "exclude-from-classmap": [],
+        "files": []
+    },
+    "config": {
+        "platform": {
+            "php": "8.1"
+        },
+        "preferred-install": "dist",
+        "prepend-autoloader": false
+    },
+    "type": "prestashop-module",
+    "extra": {
+        "module": {
+            "name": "Gestione id Eurosolution per i clienti",
+            "version": "1.0.0",
+            "author": "Massimiliano Palermo",
+            "author_email": "maxx.palermo@gmail.com",
+            "author_url": "https://www.prestashop.maxpalermo.it",
+            "license": "AFL-3.0",
+            "url": "https://www.prestashop.maxpalermo.it",
+            "readme": "README.md"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

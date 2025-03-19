@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>mpeurosolution</name>
+    <displayName><![CDATA[MP Id Eurosolution]]></displayName>
+    <version><![CDATA[2.0.3]]></version>
+    <description><![CDATA[Questo modulo Gestisce il codice Eurosolution dei clienti.]]></description>
+    <author><![CDATA[Massimiliano Palermo]]></author>
+    <tab><![CDATA[administration]]></tab>
+	<confirmUninstall><![CDATA[Are you sure you want uninstall this module?]]></confirmUninstall>
+    <is_configurable>0</is_configurable>
+    <need_instance>0</need_instance>
+</module>
