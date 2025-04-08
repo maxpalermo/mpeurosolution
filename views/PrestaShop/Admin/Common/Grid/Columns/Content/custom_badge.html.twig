@@ -26,7 +26,7 @@
 {% set fontSize = record[column.options.attr.font_size] is defined ? record[column.options.attr.font_size] : '1.2rem' %}
 {% set textAlign = 'text_align' in column.options.attr ? record[column.options.attr.text_align] : 'text-center' %}
 {% set eurosolutionId = record[column.options.field] %}
-{% set customerId = record.id_customer %}
+{% set MPEUROSOLUTION_customerId = record.id_customer %}
 {% set badgeColor = column.options.badge_type %}
 
 <div class="{{ textAlign }}">
@@ -34,7 +34,7 @@
   <span 
     class="eurosolutionId badge badge-{{ badgeColor }} pointer"
     style="font-size: {{ fontSize }}; border-radius: 0;"
-    data-customer_id="{{ customerId }}"
+    data-customer_id="{{ MPEUROSOLUTION_customerId }}"
     data-eurosolution_id="{{ eurosolutionId }}"
     data-tippy-content="Codice Eurosolution"
     >
@@ -43,7 +43,7 @@
 {% else %}
   <span 
     class="eurosolutionId pointer" 
-    data-customer_id="{{ customerId }}"
+    data-customer_id="{{ MPEUROSOLUTION_customerId }}"
     data-eurosolution_id="0"
     data-tippy-content="Aggiungi un codice Eurosolution"
     >

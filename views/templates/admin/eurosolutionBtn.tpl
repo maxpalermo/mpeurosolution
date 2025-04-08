@@ -32,18 +32,18 @@
         <span
               class="eurosolutionId badge badge-{$badgeColor} pointer"
               style="font-size: {$fontSize}; border-radius: 0;"
-              data-customer_id="{$customerId|intval}"
+              data-customer_id="{$MPEUROSOLUTION_customerId|intval}"
               data-eurosolution_id="{$eurosolutionId|intval}"
-              data-employee_id="{$employeeId|intval}"
+              data-employee_id="{$MPEUROSOLUTION_employeeId|intval}"
               data-tippy-content="Codice Eurosolution">
             {$eurosolutionId}
         </span>
     {else}
         <span
               class="eurosolutionId pointer"
-              data-customer_id="{$customerId|intval}"
+              data-customer_id="{$MPEUROSOLUTION_customerId|intval}"
               data-eurosolution_id="0"
-              data-employee_id="{$employeeId|intval}"
+              data-employee_id="{$MPEUROSOLUTION_employeeId|intval}"
               data-tippy-content="Aggiungi un codice Eurosolution">
             <span class="material-icons text-info">add_circle</span>
         </span>

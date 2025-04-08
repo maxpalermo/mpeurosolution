@@ -52,7 +52,7 @@ final class CustomBadge extends AbstractColumn
                 'clickable' => true,
                 'color_field' => '',
                 'callback_method' => 'displayBadgeIdEurosolution',
-                'employeeId' => \Context::getContext()->employee->id,
+                'MPEUROSOLUTION_employeeId' => \Context::getContext()->employee->id,
             ])
             ->setAllowedTypes('field', 'string')
             ->setAllowedTypes('empty_value', 'string')

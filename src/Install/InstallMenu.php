@@ -18,7 +18,7 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  */
 
-namespace MpSoft\MpEurosolution\Install;
+namespace MpSoft\MpEurosolution\install;
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -133,7 +133,7 @@ class InstallMenu
      */
     public function installMenu(
         string $class_name,
-        $name,
+        string|array $name,
         string $parent_class_name = 'DEFAULT',
         string $icon = '',
         string $route_name = '',
@@ -166,13 +166,9 @@ class InstallMenu
             }
         }
 
-        if ($parent_class_name === -1) {
-            $id_tab_parent = -1;
-        } else {
-            $id_tab_parent = (int) SymfonyContainer::getInstance()
-                ->get('prestashop.core.admin.tab.repository')
-                ->findOneIdByClassName($parent_class_name);
-        }
+        $id_tab_parent = (int) SymfonyContainer::getInstance()
+            ->get('prestashop.core.admin.tab.repository')
+            ->findOneIdByClassName($parent_class_name);
 
         if ($position === null) {
             $position = (int) \Tab::getNewLastPosition($id_tab_parent);

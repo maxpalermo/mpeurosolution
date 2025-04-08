@@ -1,6 +1,6 @@
 async function bindButton(button) {
     button.addEventListener("click", async () => {
-        const customerId = button.dataset.customer_id;
+        const MPEUROSOLUTION_customerId = button.dataset.customer_id;
         const eurosolutionId = button.dataset.eurosolution_id;
 
         Swal.fire({
@@ -20,7 +20,7 @@ async function bindButton(button) {
                 const newEurosolutionId = result.value;
 
                 // Invia una richiesta AJAX per aggiornare il valore
-                const response = await fetch(adminAjaxURL, {
+                const response = await fetch(MPEUROSOLUTION_adminAjaxURL, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -33,9 +33,9 @@ async function bindButton(button) {
                     body: JSON.stringify({
                         ajax: 1,
                         action: "updateEurosolutionId",
-                        id_customer: customerId,
+                        id_customer: MPEUROSOLUTION_customerId,
                         id_eurosolution: newEurosolutionId,
-                        id_employee: employeeId
+                        id_employee: MPEUROSOLUTION_employeeId
                     })
                 });
 
@@ -44,7 +44,7 @@ async function bindButton(button) {
                 if (json.success) {
                     Swal.fire("Successo!", "ID EuroSolution aggiornato.", "success");
                     const btnEurosolution = json.button;
-                    if (orderId && orderId > 0) {
+                    if (MPEUROSOLUTION_orderId && MPEUROSOLUTION_orderId > 0) {
                         const productRow = document.querySelector(".product-row");
                         const customerCard = productRow.querySelector(".customer.card");
                         const customerCardHeader = customerCard.querySelector(".card-header");
@@ -71,7 +71,7 @@ async function bindButton(button) {
         });
     });
 }
-document.addEventListener("DOMContentLoaded", async (e) => {
+document.addEventListener("MpEurosolutionReady", async (e) => {
     // Configura MutationObserver
     const observer = new MutationObserver((mutationsList) => {
         for (const mutation of mutationsList) {
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     });
 
     // Osserva il contenitore per cambiamenti nel DOM
-    if (orderId && orderId > 0) {
+    if (MPEUROSOLUTION_orderId && MPEUROSOLUTION_orderId > 0) {
         const container = document.querySelector(".product-row").querySelector(".customer.card").querySelector(".card-header");
         observer.observe(container, { childList: true });
     }
@@ -97,8 +97,8 @@ document.addEventListener("DOMContentLoaded", async (e) => {
         bindButton(button);
     });
 
-    if (orderId && orderId > 0) {
-        const response = await fetch(adminAjaxURL, {
+    if (MPEUROSOLUTION_orderId && MPEUROSOLUTION_orderId > 0) {
+        const response = await fetch(MPEUROSOLUTION_adminAjaxURL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -111,9 +111,9 @@ document.addEventListener("DOMContentLoaded", async (e) => {
             body: JSON.stringify({
                 ajax: 1,
                 action: "renderButton",
-                id_order: orderId,
+                id_order: MPEUROSOLUTION_orderId,
                 id_customer: 0,
-                id_employee: employeeId
+                id_employee: MPEUROSOLUTION_employeeId
             })
         });
 
@@ -134,35 +134,12 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     tippy(".eurosolutionId");
 
     const customerCard = document.querySelector(".card.customer-personal-informations-card");
-    if (customerCard) {
-        console.log("Trovata customerCard");
-        const cardBody = document.querySelector(".card-body");
-        const eurosolutionRow = async () => {
-            const response = await fetch(adminAjaxURL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "X-PS-Module": "mpeurosolution",
-                    "X-PS-Module-Version": "2.0.3",
-                    "X-PS-method": "renderCustomerEurosolutionRow",
-                    "X-PS-ajax": 1
-                },
-                body: JSON.stringify({
-                    ajax: 1,
-                    action: "renderCustomerEurosolutionRow",
-                    id_order: 0,
-                    id_customer: customerId,
-                    id_employee: employeeId
-                })
-            });
-            const json = await response.json();
-            const button = json;
-            return button;
-        };
-        const containerRow = document.createElement("div");
-        containerRow.classList.add("row", "mb-1", "eurosolution-container");
-        containerRow.innerHTML = await eurosolutionRow();
-        cardBody.appendChild(containerRow.querySelector("div"));
+    const eurosolutionRow = document.getElementById("mpeurosolution-personal-info");
+    if (customerCard && eurosolutionRow) {
+        const templateContent = eurosolutionRow.content;
+        const cardBody = customerCard.querySelector(".card-body");
+        const childNode = templateContent.cloneNode(true);
+
+        cardBody.appendChild(childNode);
     }
 });

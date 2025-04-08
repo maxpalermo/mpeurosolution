@@ -76,30 +76,30 @@ class FetchAsyncMethods
 
     public function updateEurosolutionId($params)
     {
-        $customerId = (int) $params['id_customer'];
+        $MPEUROSOLUTION_customerId = (int) $params['id_customer'];
         $eurosolutionId = (int) $params['id_eurosolution'];
-        $employeeId = (int) $params['id_employee'];
+        $MPEUROSOLUTION_employeeId = (int) $params['id_employee'];
 
         try {
-            $model = new ModelCustomerEurosolution($customerId);
+            $model = new ModelCustomerEurosolution($MPEUROSOLUTION_customerId);
             if (\Validate::isLoadedObject($model)) {
                 $model->id_eurosolution = $eurosolutionId;
-                $model->id_employee = $employeeId;
+                $model->id_employee = $MPEUROSOLUTION_employeeId;
                 $model->date_upd = date('Y-m-d H:i:s');
                 $result = $model->update();
             } else {
                 $model->force_id = true;
-                $model->id = $customerId;
+                $model->id = $MPEUROSOLUTION_customerId;
                 $model->id_eurosolution = $eurosolutionId;
-                $model->id_employee = $employeeId;
+                $model->id_employee = $MPEUROSOLUTION_employeeId;
                 $model->date_add = date('Y-m-d H:i:s');
                 $model->date_upd = date('Y-m-d H:i:s');
                 $result = $model->add();
             }
             if ($result) {
-                $message = sprintf('Il cliente %s è stato aggiornato con l\'ID Eurosolution %s', $customerId, $eurosolutionId);
+                $message = sprintf('Il cliente %s è stato aggiornato con l\'ID Eurosolution %s', $MPEUROSOLUTION_customerId, $eurosolutionId);
             } else {
-                $message = sprintf('Il cliente %s non è stato aggiornato.', $customerId);
+                $message = sprintf('Il cliente %s non è stato aggiornato.', $MPEUROSOLUTION_customerId);
                 if (\Db::getInstance()->getMsgError()) {
                     $message .= ' Error: ' . \Db::getInstance()->getMsgError();
                 }
@@ -112,7 +112,7 @@ class FetchAsyncMethods
         return [
             'success' => $result,
             'message' => $message,
-            'button' => $this->renderButton(['id_customer' => $customerId]),
+            'button' => $this->renderButton(['id_customer' => $MPEUROSOLUTION_customerId]),
         ];
     }
 
@@ -136,9 +136,9 @@ class FetchAsyncMethods
         }
         $template = $this->getTemplate('eurosolutionBtn.tpl');
         $template->assign([
-            'customerId' => $id_customer,
+            'MPEUROSOLUTION_customerId' => $id_customer,
             'eurosolutionId' => $eurosolutionId,
-            'employeeId' => (int) $model->id_employee,
+            'MPEUROSOLUTION_employeeId' => (int) $model->id_employee,
             'id_order' => $id_order,
         ]);
 
@@ -158,9 +158,9 @@ class FetchAsyncMethods
         }
         $template = $this->getTemplate('eurosolutionRow.tpl');
         $template->assign([
-            'customerId' => $id_customer,
+            'MPEUROSOLUTION_customerId' => $id_customer,
             'eurosolutionId' => $eurosolutionId,
-            'employeeId' => $id_employee,
+            'MPEUROSOLUTION_employeeId' => $id_employee,
         ]);
 
         return $template->fetch();
