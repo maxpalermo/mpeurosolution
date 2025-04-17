@@ -33,7 +33,7 @@ use PrestaShop\PrestaShop\Core\Grid\Filter\Filter;
 use PrestaShop\PrestaShop\Core\Module\WidgetInterface;
 use PrestaShop\PrestaShop\Core\Search\Filters\CustomerFilters;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class MpEurosolution extends Module implements WidgetInterface
 {
@@ -271,8 +271,9 @@ class MpEurosolution extends Module implements WidgetInterface
             'required' => false,
             'mapped' => true,
             'constraints' => [
-                new NotBlank([
-                    'message' => $this->l('Il campo Eurosolution non può essere vuoto'),
+                new Regex([
+                    'pattern' => '/^(0|[1-9][0-9]*)$/',
+                    'message' => $this->l('Devi inserire un ID numerico positivo valido'),
                 ]),
             ],
             'attr' => [

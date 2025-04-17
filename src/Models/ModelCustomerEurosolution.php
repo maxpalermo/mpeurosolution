@@ -44,17 +44,17 @@ class ModelCustomerEurosolution extends \ObjectModel
             'id_eurosolution' => [
                 'type' => self::TYPE_INT,
                 'validate' => 'isUnsignedId',
-                'required' => true,
+                'required' => false,
             ],
             'id_employee' => [
                 'type' => self::TYPE_INT,
                 'validate' => 'isUnsignedId',
-                'required' => true,
+                'required' => false,
             ],
             'date_add' => [
                 'type' => self::TYPE_DATE,
                 'validate' => 'isDate',
-                'required' => true,
+                'required' => false,
             ],
             'date_upd' => [
                 'type' => self::TYPE_DATE,
